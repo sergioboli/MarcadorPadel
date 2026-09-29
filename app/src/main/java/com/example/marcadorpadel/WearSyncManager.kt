@@ -8,11 +8,11 @@ class WearSyncManager(private val context: Context) {
 
     private val messageClient: MessageClient = Wearable.getMessageClient(context)
 
-    fun sendScoreUpdate(scoreA: Int, scoreB: Int) {
-        val scoreData = "$scoreA:$scoreB".toByteArray(Charsets.UTF_8)
+    fun sendCustomMessage(path: String, data: String) {
+        val bytes = data.toByteArray(Charsets.UTF_8)
         Wearable.getNodeClient(context).connectedNodes.addOnSuccessListener { nodes ->
             for (node in nodes) {
-                messageClient.sendMessage(node.id, "/update_score", scoreData)
+                messageClient.sendMessage(node.id, path, bytes)
             }
         }
     }
