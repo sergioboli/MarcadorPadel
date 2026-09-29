@@ -2,70 +2,103 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#000000"
+    android:padding="16dp">
 
-    <!-- Lado Izquierdo: Locales -->
-    <FrameLayout
-        android:id="@+id/btnTeam1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#1E88E5">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PÁDEL"
+        android:textColor="#888888"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
 
-        <TextView
-            android:id="@+id/txtHeader1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_marginTop="20dp"
-            android:text="SETS: 0  |  Juegos: 0"
-            android:textColor="#FFFFFF"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+    <!-- Zona central dividida en dos marcadores táctiles -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <TextView
-            android:id="@+id/txtScore1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="0"
-            android:textColor="#FFFFFF"
-            android:textSize="120sp"
-            android:textStyle="bold" />
-    </FrameLayout>
+        <!-- Lado Equipo A -->
+        <LinearLayout
+            android:id="@+id/layoutTeamA"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="#224CAF50"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginEnd="2dp">
 
-    <View
-        android:layout_width="4dp"
-        android:layout_height="match_parent"
-        android:background="#000000" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EQ A"
+                android:textColor="#4CAF50"
+                android:textSize="11sp"
+                android:textStyle="bold" />
 
-    <!-- Lado Derecho: Visitantes -->
-    <FrameLayout
-        android:id="@+id/btnTeam2"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#E53935">
+            <TextView
+                android:id="@+id/tvScoreA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtHeader2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_marginTop="20dp"
-            android:text="SETS: 0  |  Juegos: 0"
-            android:textColor="#FFFFFF"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+        <!-- Lado Equipo B -->
+        <LinearLayout
+            android:id="@+id/layoutTeamB"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="#222196F3"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginStart="2dp">
 
-        <TextView
-            android:id="@+id/txtScore2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="0"
-            android:textColor="#FFFFFF"
-            android:textSize="120sp"
-            android:textStyle="bold" />
-    </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EQ B"
+                android:textColor="#2196F3"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvScoreB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Botón pequeño de reinicio -->
+    <TextView
+        android:id="@+id/btnReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RESET"
+        android:textColor="#FF5252"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:padding="6dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="4dp" />
+
 </LinearLayout>
