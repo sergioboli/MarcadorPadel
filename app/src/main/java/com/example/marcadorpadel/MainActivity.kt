@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Forzar orientación horizontal por código
+        // Forzar horizontal en el móvil
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         
         setContentView(R.layout.activity_main)
