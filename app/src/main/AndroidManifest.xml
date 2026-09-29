@@ -10,9 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <!-- Actividad Principal (Móvil) -->
+        <!-- Actividad Principal (Móvil en HORIZONTAL) -->
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
