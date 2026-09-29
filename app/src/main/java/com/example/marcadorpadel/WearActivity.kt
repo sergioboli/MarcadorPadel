@@ -27,20 +27,25 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
 
         val layoutTeamA: View = findViewById(R.id.layoutTeamA)
         val layoutTeamB: View = findViewById(R.id.layoutTeamB)
-        val btnReset: View = findViewById(R.id.btnReset)
 
         syncManager = WearSyncManager(this)
 
+        // Tocar -> Sumar punto
         layoutTeamA.setOnClickListener {
             syncManager.sendCustomMessage("/add_point", "1")
         }
-
         layoutTeamB.setOnClickListener {
             syncManager.sendCustomMessage("/add_point", "2")
         }
 
-        btnReset.setOnClickListener {
-            syncManager.sendCustomMessage("/reset_match", "")
+        // Dejar pulsado -> Deshacer punto de ese equipo
+        layoutTeamA.setOnLongClickListener {
+            syncManager.sendCustomMessage("/undo_point", "1")
+            true
+        }
+        layoutTeamB.setOnLongClickListener {
+            syncManager.sendCustomMessage("/undo_point", "2")
+            true
         }
     }
 
