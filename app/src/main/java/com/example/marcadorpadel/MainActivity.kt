@@ -2,6 +2,7 @@ package com.example.marcadorpadel
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.wearable.MessageClient
@@ -23,11 +24,50 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Forzar horizontal en el móvil
+        // Forzar orientación horizontal
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         
         setContentView(R.layout.activity_main)
+
+        val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
+        val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
+
+        // Clics para sumar desde el móvil
+        layoutTeamA?.setOnClickListener { addPoint(true) }
+        layoutTeamB?.setOnClickListener { addPoint(false) }
+
         updateUI()
+    }
+
+    private fun addPoint(isTeamA: Boolean) {
+        if (isTeamA) scoreA++ else scoreB++
+        checkGameWinner()
+        updateUI()
+    }
+
+    private fun checkGameWinner() {
+        if (scoreA >= 4 || scoreB >= 4) {
+            val diff = scoreA - scoreB
+            if (isGoldenPoint) {
+                if (scoreA >= 4) winGame(true) else if (scoreB >= 4) winGame(false)
+            } else {
+                if (diff >= 2) winGame(true)
+                else if (diff <= -2) winGame(false)
+            }
+        }
+    }
+
+    private fun winGame(isTeamA: Boolean) {
+        scoreA = 0
+        scoreB = 0
+        if (isTeamA) gamesA++ else gamesB++
+        if (gamesA >= 6 || gamesB >= 6) {
+            if (Math.abs(gamesA - gamesB) >= 2) {
+                if (gamesA > gamesB) setsA++ else setsB++
+                gamesA = 0
+                gamesB = 0
+            }
+        }
     }
 
     override fun onResume() {
