@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         val btnModeGold: Button = findViewById(R.id.btnModeGold)
         val layoutTeamA: View = findViewById(R.id.layoutTeamA)
         val layoutTeamB: View = findViewById(R.id.layoutTeamB)
-        val btnUndo: Button = findViewById(R.id.btnUndo)
-        val btnReset: Button = findViewById(R.id.btnReset)
 
         syncManager = WearSyncManager(this)
 
@@ -56,27 +54,32 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
             layoutModeSelection.visibility = View.GONE
         }
 
+        // Tocar Equipo 1 -> Sumar Punto
         layoutTeamA.setOnClickListener {
             addPoint(1)
         }
 
+        // Dejar pulsado Equipo 1 -> Restar Punto / Deshacer
+        layoutTeamA.setOnLongClickListener {
+            undoPoint(1)
+            true
+        }
+
+        // Tocar Equipo 2 -> Sumar Punto
         layoutTeamB.setOnClickListener {
             addPoint(2)
         }
 
-        btnUndo.setOnClickListener {
-            undoPoint()
-        }
-
-        btnReset.setOnClickListener {
-            resetMatch()
+        // Dejar pulsado Equipo 2 -> Restar Punto / Deshacer
+        layoutTeamB.setOnLongClickListener {
+            undoPoint(2)
+            true
         }
     }
 
     private fun addPoint(team: Int) {
         if (team == 1) ptsA++ else ptsB++
 
-        // Lógica Punto de Oro / Deuce
         if (ptsA >= 3 && ptsB >= 3) {
             if (isGoldPoint) {
                 if (team == 1 && ptsA == 4) winGame(1)
@@ -110,9 +113,9 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         }
     }
 
-    private fun undoPoint() {
-        if (ptsA > 0) ptsA--
-        else if (ptsB > 0) ptsB--
+    private fun undoPoint(team: Int) {
+        if (team == 1 && ptsA > 0) ptsA--
+        else if (team == 2 && ptsB > 0) ptsB--
         updateUI()
         sendDataToWear()
     }
@@ -162,11 +165,18 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     }
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
-        if (messageEvent.path == "/add_point") {
-            val team = String(messageEvent.data, Charsets.UTF_8).toIntOrNull() ?: 1
-            runOnUiThread { addPoint(team) }
-        } else if (messageEvent.path == "/reset_match") {
-            runOnUiThread { resetMatch() }
+        when (messageEvent.path) {
+            "/add_point" -> {
+                val team = String(messageEvent.data, Charsets.UTF_8).toIntOrNull() ?: 1
+                runOnUiThread { addPoint(team) }
+            }
+            "/undo_point" -> {
+                val team = String(messageEvent.data, Charsets.UTF_8).toIntOrNull() ?: 1
+                runOnUiThread { undoPoint(team) }
+            }
+            "/reset_match" -> {
+                runOnUiThread { resetMatch() }
+            }
         }
     }
 }
