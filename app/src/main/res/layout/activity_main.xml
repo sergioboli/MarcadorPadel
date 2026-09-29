@@ -124,31 +124,4 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Botones Flotantes (Deshacer y Reset) -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="12dp">
-
-        <Button
-            android:id="@+id/btnUndo"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:text="Deshacer"
-            android:textSize="11sp"
-            android:backgroundTint="#555555"
-            android:layout_marginEnd="8dp" />
-
-        <Button
-            android:id="@+id/btnReset"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:text="Nuevo Partido"
-            android:textSize="11sp"
-            android:backgroundTint="#E53935" />
-    </LinearLayout>
-
 </RelativeLayout>
