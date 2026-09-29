@@ -5,8 +5,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.wearable.MessageClient
+import com.google.android.gms.wearable.MessageEvent
+import com.google.android.gms.wearable.Wearable
 
-class WearActivity : AppCompatActivity() {
+class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListener {
 
     private var scoreA = 0
     private var scoreB = 0
@@ -16,8 +19,15 @@ class WearActivity : AppCompatActivity() {
     private var setsB = 0
     private var isGoldenPoint = false
 
+    private val history = mutableListOf<State>()
     private val pointsSequence = arrayOf("0", "15", "30", "40")
     private lateinit var syncManager: WearSyncManager
+
+    data class State(
+        val scoreA: Int, val scoreB: Int,
+        val gamesA: Int, val gamesB: Int,
+        val setsA: Int, val setsB: Int
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +42,6 @@ class WearActivity : AppCompatActivity() {
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
-        // Selección de modo inicial
         btnNormal?.setOnClickListener {
             isGoldenPoint = false
             layoutMode?.visibility = View.GONE
@@ -45,22 +54,47 @@ class WearActivity : AppCompatActivity() {
             syncState()
         }
 
-        // Clics para sumar puntos en el reloj
+        // Clic corto: Sumar punto
         layoutTeamA?.setOnClickListener { addPoint(true) }
         layoutTeamB?.setOnClickListener { addPoint(false) }
+
+        // Clic largo: Deshacer último punto
+        layoutTeamA?.setOnLongClickListener {
+            undoPoint()
+            true
+        }
+        layoutTeamB?.setOnLongClickListener {
+            undoPoint()
+            true
+        }
 
         updateUI()
     }
 
+    private fun saveState() {
+        history.add(State(scoreA, scoreB, gamesA, gamesB, setsA, setsB))
+    }
+
     private fun addPoint(isTeamA: Boolean) {
-        if (isTeamA) {
-            scoreA++
-        } else {
-            scoreB++
-        }
+        saveState()
+        if (isTeamA) scoreA++ else scoreB++
         checkGameWinner()
         updateUI()
         syncState()
+    }
+
+    private fun undoPoint() {
+        if (history.isNotEmpty()) {
+            val lastState = history.removeAt(history.size - 1)
+            scoreA = lastState.scoreA
+            scoreB = lastState.scoreB
+            gamesA = lastState.gamesA
+            gamesB = lastState.gamesB
+            setsA = lastState.setsA
+            setsB = lastState.setsB
+            updateUI()
+            syncState()
+        }
     }
 
     private fun checkGameWinner() {
@@ -84,6 +118,35 @@ class WearActivity : AppCompatActivity() {
                 if (gamesA > gamesB) setsA++ else setsB++
                 gamesA = 0
                 gamesB = 0
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Wearable.getMessageClient(this).addListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Wearable.getMessageClient(this).removeListener(this)
+    }
+
+    override fun onMessageReceived(messageEvent: MessageEvent) {
+        if (messageEvent.path == "/padel_score_sync") {
+            val data = String(messageEvent.data, Charsets.UTF_8)
+            val parts = data.split(",")
+            if (parts.size >= 7) {
+                runOnUiThread {
+                    scoreA = parts[0].toIntOrNull() ?: 0
+                    scoreB = parts[1].toIntOrNull() ?: 0
+                    gamesA = parts[2].toIntOrNull() ?: 0
+                    gamesB = parts[3].toIntOrNull() ?: 0
+                    setsA = parts[4].toIntOrNull() ?: 0
+                    setsB = parts[5].toIntOrNull() ?: 0
+                    isGoldenPoint = parts[6].toBoolean()
+                    updateUI()
+                }
             }
         }
     }
