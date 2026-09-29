@@ -19,39 +19,68 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     private var setsB = 0
     private var isGoldenPoint = false
 
+    private val history = mutableListOf<State>()
     private val pointsSequence = arrayOf("0", "15", "30", "40")
+    private lateinit var syncManager: WearSyncManager
+
+    data class State(
+        val scoreA: Int, val scoreB: Int,
+        val gamesA: Int, val gamesB: Int,
+        val setsA: Int, val setsB: Int
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Forzar orientación horizontal
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        
         setContentView(R.layout.activity_main)
+
+        syncManager = WearSyncManager(this)
 
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
-        // Escuchadores de clics independientes
-        layoutTeamA?.setOnClickListener {
-            addPoint(true)
-        }
+        // Clic corto: Sumar punto
+        layoutTeamA?.setOnClickListener { addPoint(true) }
+        layoutTeamB?.setOnClickListener { addPoint(false) }
 
-        layoutTeamB?.setOnClickListener {
-            addPoint(false)
+        // Clic largo: Deshacer
+        layoutTeamA?.setOnLongClickListener {
+            undoPoint()
+            true
+        }
+        layoutTeamB?.setOnLongClickListener {
+            undoPoint()
+            true
         }
 
         updateUI()
     }
 
+    private fun saveState() {
+        history.add(State(scoreA, scoreB, gamesA, gamesB, setsA, setsB))
+    }
+
     private fun addPoint(isTeamA: Boolean) {
-        if (isTeamA) {
-            scoreA++
-        } else {
-            scoreB++
-        }
+        saveState()
+        if (isTeamA) scoreA++ else scoreB++
         checkGameWinner()
         updateUI()
+        syncState()
+    }
+
+    private fun undoPoint() {
+        if (history.isNotEmpty()) {
+            val lastState = history.removeAt(history.size - 1)
+            scoreA = lastState.scoreA
+            scoreB = lastState.scoreB
+            gamesA = lastState.gamesA
+            gamesB = lastState.gamesB
+            setsA = lastState.setsA
+            setsB = lastState.setsB
+            updateUI()
+            syncState()
+        }
     }
 
     private fun checkGameWinner() {
@@ -135,6 +164,15 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
             myScore == opponentScore -> "40"
             myScore > opponentScore -> if (isGoldenPoint) "40" else "AD"
             else -> "40"
+        }
+    }
+
+    private fun syncState() {
+        try {
+            val data = "$scoreA,$scoreB,$gamesA,$gamesB,$setsA,$setsB,$isGoldenPoint"
+            syncManager.sendCustomMessage("/padel_score_sync", data)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }
