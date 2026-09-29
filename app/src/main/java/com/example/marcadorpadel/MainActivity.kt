@@ -32,15 +32,24 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
-        // Clics para sumar desde el móvil
-        layoutTeamA?.setOnClickListener { addPoint(true) }
-        layoutTeamB?.setOnClickListener { addPoint(false) }
+        // Escuchadores de clics independientes
+        layoutTeamA?.setOnClickListener {
+            addPoint(true)
+        }
+
+        layoutTeamB?.setOnClickListener {
+            addPoint(false)
+        }
 
         updateUI()
     }
 
     private fun addPoint(isTeamA: Boolean) {
-        if (isTeamA) scoreA++ else scoreB++
+        if (isTeamA) {
+            scoreA++
+        } else {
+            scoreB++
+        }
         checkGameWinner()
         updateUI()
     }
@@ -72,12 +81,20 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
 
     override fun onResume() {
         super.onResume()
-        Wearable.getMessageClient(this).addListener(this)
+        try {
+            Wearable.getMessageClient(this).addListener(this)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onPause() {
         super.onPause()
-        Wearable.getMessageClient(this).removeListener(this)
+        try {
+            Wearable.getMessageClient(this).removeListener(this)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
