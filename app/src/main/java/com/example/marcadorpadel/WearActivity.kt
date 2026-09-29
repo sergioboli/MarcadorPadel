@@ -8,16 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 
 class WearActivity : AppCompatActivity() {
 
-    private var isGoldenPoint = false
     private var scoreA = 0
     private var scoreB = 0
     private var gamesA = 0
     private var gamesB = 0
     private var setsA = 0
     private var setsB = 0
+    private var isGoldenPoint = false
 
     private val pointsSequence = arrayOf("0", "15", "30", "40")
-
     private lateinit var syncManager: WearSyncManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +32,7 @@ class WearActivity : AppCompatActivity() {
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
+        // Selección de modo inicial
         btnNormal?.setOnClickListener {
             isGoldenPoint = false
             layoutMode?.visibility = View.GONE
@@ -45,6 +45,7 @@ class WearActivity : AppCompatActivity() {
             syncState()
         }
 
+        // Clics para sumar puntos en el reloj
         layoutTeamA?.setOnClickListener { addPoint(true) }
         layoutTeamB?.setOnClickListener { addPoint(false) }
 
