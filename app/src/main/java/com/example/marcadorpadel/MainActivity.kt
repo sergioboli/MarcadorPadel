@@ -1,5 +1,6 @@
 package com.example.marcadorpadel
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,10 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Forzar orientación horizontal por código
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        
         setContentView(R.layout.activity_main)
         updateUI()
     }
