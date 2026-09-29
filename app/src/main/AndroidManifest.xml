@@ -24,12 +24,17 @@
             </intent-filter>
         </activity>
 
-        <!-- Actividad para Reloj Wear OS (Vertical) -->
+        <!-- Actividad Principal para Reloj (Vertical y especifica de Wear OS) -->
         <activity
             android:name=".WearActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
+            </intent-filter>
+        </activity>
 
     </application>
 
