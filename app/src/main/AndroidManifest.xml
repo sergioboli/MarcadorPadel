@@ -12,19 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
-        <!-- Actividad Principal para Teléfono (Horizontal) -->
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:screenOrientation="landscape"
-            android:configChanges="orientation|screenSize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <!-- Actividad Principal para Reloj (Vertical y especifica de Wear OS) -->
+        <!-- Actividad para Reloj Wear OS (Vertical, Launcher por defecto) -->
         <activity
             android:name=".WearActivity"
             android:exported="true"
@@ -32,9 +20,16 @@
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Actividad para Teléfono (Horizontal) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize" />
 
     </application>
 
