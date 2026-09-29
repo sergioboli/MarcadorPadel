@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
-        <!-- Actividad para el Teléfono (Horizontal - Launcher principal del Móvil) -->
+        <!-- Actividad para el Teléfono (Horizontal) -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <!-- Actividad para el Reloj (Vertical - Launcher para Wear OS) -->
+        <!-- Actividad para el Reloj (Vertical) -->
         <activity
             android:name=".WearActivity"
             android:exported="true"
