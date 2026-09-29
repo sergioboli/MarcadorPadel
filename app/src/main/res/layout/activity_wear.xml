@@ -1,1 +1,76 @@
-app/src/main/res/layout/activity_wear.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="#000000">
+
+    <!-- Lado Izquierdo (Equipo 1) -->
+    <LinearLayout
+        android:id="@+id/layoutTeamA"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#154CAF50"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/tvSetsA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S:0 J:0"
+            android:textColor="#81C784"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvScoreA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Línea central -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#222222" />
+
+    <!-- Lado Derecho (Equipo 2) -->
+    <LinearLayout
+        android:id="@+id/layoutTeamB"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#152196F3"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/tvSetsB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S:0 J:0"
+            android:textColor="#64B5F6"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvScoreB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
