@@ -1,127 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     android:background="#050505"
     android:keepScreenOn="true">
 
-    <!-- Diálogo Inicial de Selección de Modo -->
+    <!-- Equipo A (Lado Izquierdo) -->
     <LinearLayout
-        android:id="@+id/layoutModeSelection"
-        android:layout_width="match_parent"
+        android:id="@+id/layoutTeamA"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="#0D0D0D"
-        android:elevation="10dp"
-        android:padding="24dp">
+        android:background="#10FFFFFF"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp">
 
         <TextView
+            android:id="@+id/tvTeamA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selecciona Modo de Juego"
+            android:text="EQUIPO 1"
+            android:textColor="#AAAAAA"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvScoreA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp" />
+            android:textSize="96sp"
+            android:textStyle="bold" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvSetsA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnModeNormal"
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:text="Ventaja / Deuce"
-                android:textSize="16sp"
-                android:backgroundTint="#4CAF50"
-                android:layout_marginEnd="16dp" />
-
-            <Button
-                android:id="@+id/btnModeGold"
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:text="Punto de Oro"
-                android:textSize="16sp"
-                android:backgroundTint="#FF9800" />
-        </LinearLayout>
+            android:text="S:0 J:0"
+            android:textColor="#00FF66"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Marcador Principal Horizontal -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Línea Separadora Central -->
+    <View
+        android:layout_width="2dp"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:background="#222222" />
 
-        <!-- Lado Equipo 1 -->
-        <LinearLayout
-            android:id="@+id/layoutTeamA"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="#154CAF50"
-            android:clickable="true"
-            android:focusable="true">
+    <!-- Equipo B (Lado Derecho) -->
+    <LinearLayout
+        android:id="@+id/layoutTeamB"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#10FFFFFF"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvSetsA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sets: 0 | Juegos: 0"
-                android:textColor="#81C784"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvTeamB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EQUIPO 2"
+            android:textColor="#AAAAAA"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvScoreA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#FFFFFF"
-                android:textSize="110sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvScoreB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="96sp"
+            android:textStyle="bold" />
 
-        <!-- Línea separadora -->
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="#333333" />
-
-        <!-- Lado Equipo 2 -->
-        <LinearLayout
-            android:id="@+id/layoutTeamB"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="#152196F3"
-            android:clickable="true"
-            android:focusable="true">
-
-            <TextView
-                android:id="@+id/tvSetsB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sets: 0 | Juegos: 0"
-                android:textColor="#64B5F6"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvScoreB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#FFFFFF"
-                android:textSize="110sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvSetsB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S:0 J:0"
+            android:textColor="#00FF66"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
