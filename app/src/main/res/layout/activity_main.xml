@@ -1,42 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:background="#050505"
-    android:padding="24dp">
+    android:keepScreenOn="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MARCADOR PÁDEL"
-        android:textColor="#888888"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
+    <!-- Diálogo Inicial de Selección de Modo -->
+    <LinearLayout
+        android:id="@+id/layoutModeSelection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#0D0D0D"
+        android:elevation="10dp"
+        android:padding="24dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecciona Modo de Juego"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnModeNormal"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:text="Ventaja / Deuce"
+                android:textSize="16sp"
+                android:backgroundTint="#4CAF50"
+                android:layout_marginEnd="16dp" />
+
+            <Button
+                android:id="@+id/btnModeGold"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:text="Punto de Oro"
+                android:textSize="16sp"
+                android:backgroundTint="#FF9800" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Marcador Principal Horizontal -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="32dp">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <!-- Equipo A -->
+        <!-- Lado Equipo 1 -->
         <LinearLayout
+            android:id="@+id/layoutTeamA"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:orientation="vertical"
             android:gravity="center"
-            android:orientation="vertical">
+            android:background="#154CAF50"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
+                android:id="@+id/tvSetsA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EQUIPO A"
-                android:textColor="#4CAF50"
-                android:textSize="16sp"
+                android:text="Sets: 0 | Juegos: 0"
+                android:textColor="#81C784"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -45,31 +82,35 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textColor="#FFFFFF"
-                android:textSize="64sp"
+                android:textSize="110sp"
                 android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/btnPointA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+1 PUNTO"
-                android:backgroundTint="#4CAF50" />
         </LinearLayout>
 
-        <!-- Equipo B -->
+        <!-- Línea separadora -->
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#333333" />
+
+        <!-- Lado Equipo 2 -->
         <LinearLayout
+            android:id="@+id/layoutTeamB"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:orientation="vertical"
             android:gravity="center"
-            android:orientation="vertical">
+            android:background="#152196F3"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
+                android:id="@+id/tvSetsB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EQUIPO B"
-                android:textColor="#2196F3"
-                android:textSize="16sp"
+                android:text="Sets: 0 | Juegos: 0"
+                android:textColor="#64B5F6"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -78,24 +119,36 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textColor="#FFFFFF"
-                android:textSize="64sp"
+                android:textSize="110sp"
                 android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/btnPointB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+1 PUNTO"
-                android:backgroundTint="#2196F3" />
         </LinearLayout>
-
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnReset"
+    <!-- Botones Flotantes (Deshacer y Reset) -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REINICIAR PARTIDO"
-        android:backgroundTint="#FF5252" />
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnUndo"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Deshacer"
+            android:textSize="11sp"
+            android:backgroundTint="#555555"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Nuevo Partido"
+            android:textSize="11sp"
+            android:backgroundTint="#E53935" />
+    </LinearLayout>
+
+</RelativeLayout>
