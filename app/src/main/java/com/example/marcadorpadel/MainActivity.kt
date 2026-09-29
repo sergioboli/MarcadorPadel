@@ -57,19 +57,14 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     private fun updateUI() {
         val tvScoreA = findViewById<TextView>(R.id.tvScoreA)
         val tvScoreB = findViewById<TextView>(R.id.tvScoreB)
-        val tvGamesA = findViewById<TextView>(R.id.tvGamesA)
-        val tvGamesB = findViewById<TextView>(R.id.tvGamesB)
         val tvSetsA = findViewById<TextView>(R.id.tvSetsA)
         val tvSetsB = findViewById<TextView>(R.id.tvSetsB)
 
         tvScoreA?.text = formatScore(scoreA, scoreB)
         tvScoreB?.text = formatScore(scoreB, scoreA)
 
-        tvGamesA?.text = gamesA.toString()
-        tvGamesB?.text = gamesB.toString()
-
-        tvSetsA?.text = setsA.toString()
-        tvSetsB?.text = setsB.toString()
+        tvSetsA?.text = "S:$setsA J:$gamesA"
+        tvSetsB?.text = "S:$setsB J:$gamesB"
     }
 
     private fun formatScore(myScore: Int, opponentScore: Int): String {
