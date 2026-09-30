@@ -19,7 +19,6 @@
         android:focusable="true"
         android:padding="8dp">
 
-        <!-- Sets y Juegos ENCIMA de los puntos -->
         <TextView
             android:id="@+id/tvSetsA"
             android:layout_width="wrap_content"
@@ -30,7 +29,6 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
-        <!-- Puntuación Gigante (Doble de tamaño) -->
         <TextView
             android:id="@+id/tvScoreA"
             android:layout_width="wrap_content"
@@ -60,7 +58,6 @@
         android:focusable="true"
         android:padding="8dp">
 
-        <!-- Sets y Juegos ENCIMA de los puntos -->
         <TextView
             android:id="@+id/tvSetsB"
             android:layout_width="wrap_content"
@@ -71,7 +68,6 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
-        <!-- Puntuación Gigante (Doble de tamaño) -->
         <TextView
             android:id="@+id/tvScoreB"
             android:layout_width="wrap_content"
