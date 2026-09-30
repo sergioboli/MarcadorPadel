@@ -11,7 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
-        <!-- MainActivity (Móvil) es la pantalla por defecto -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -22,11 +21,22 @@
             </intent-filter>
         </activity>
 
-        <!-- WearActivity (Reloj) -->
-        <activity
-            android:name=".WearActivity"
+        <service
+            android:name=".WearDataService"
             android:exported="true">
-        </activity>
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <data
+                    android:host="*"
+                    android:pathPrefix="/padel_score_sync"
+                    android:scheme="wear" />
+                <data
+                    android:host="*"
+                    android:pathPrefix="/request_sync"
+                    android:scheme="wear" />
+            </intent-filter>
+        </service>
 
     </application>
 

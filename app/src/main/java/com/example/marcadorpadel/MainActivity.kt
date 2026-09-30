@@ -1,16 +1,19 @@
 package com.example.marcadorpadel
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.wearable.MessageClient
-import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.Wearable
 
-class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListener {
+class MainActivity : AppCompatActivity() {
 
     private var scoreA = 0
     private var scoreB = 0
@@ -24,19 +27,51 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     private val pointsSequence = arrayOf("0", "15", "30", "40")
     private lateinit var syncManager: WearSyncManager
 
+    private val updateReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val path = intent?.getStringExtra("path")
+            val data = intent?.getStringExtra("data") ?: ""
+
+            if (path == "/padel_score_sync") {
+                val parts = data.split(",")
+                if (parts.size >= 7) {
+                    runOnUiThread {
+                        scoreA = parts[0].toIntOrNull() ?: 0
+                        scoreB = parts[1].toIntOrNull() ?: 0
+                        gamesA = parts[2].toIntOrNull() ?: 0
+                        gamesB = parts[3].toIntOrNull() ?: 0
+                        setsA = parts[4].toIntOrNull() ?: 0
+                        setsB = parts[5].toIntOrNull() ?: 0
+                        isGoldenPoint = parts[6].toBoolean()
+                        isModeSelected = true
+
+                        findViewById<View>(R.id.layoutModeSelection)?.visibility = View.GONE
+                        findViewById<View>(R.id.tvWearWaiting)?.visibility = View.GONE
+                        findViewById<View>(R.id.layoutWearMainContent)?.visibility = View.VISIBLE
+
+                        updateUI()
+                    }
+                }
+            } else if (path == "/request_sync") {
+                syncState()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Si se ejecuta en un reloj Wear OS, redirigir a la interfaz del reloj
+        syncManager = WearSyncManager(this)
+
         if (packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH)) {
             setContentView(R.layout.activity_wear)
-            setupWearEvents()
+            setupClickListeners()
+            // Pedir datos al móvil en cuanto se abre la app en el reloj
+            syncManager.sendCustomMessage("/request_sync", "get")
         } else {
             setContentView(R.layout.activity_main)
             setupPhoneEvents()
         }
-
-        syncManager = WearSyncManager(this)
     }
 
     private fun setupPhoneEvents() {
@@ -58,10 +93,6 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
             syncState()
         }
 
-        setupClickListeners()
-    }
-
-    private fun setupWearEvents() {
         setupClickListeners()
     }
 
@@ -127,43 +158,21 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
 
     override fun onResume() {
         super.onResume()
-        Wearable.getMessageClient(this).addListener(this)
+        val filter = IntentFilter("com.example.marcadorpadel.UPDATE_SCORE")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(updateReceiver, filter, RECEIVER_NOT_EXPORTED)
+        } else {
+            registerReceiver(updateReceiver, filter)
+        }
         syncManager.sendCustomMessage("/request_sync", "get")
     }
 
     override fun onPause() {
         super.onPause()
-        Wearable.getMessageClient(this).removeListener(this)
-    }
-
-    override fun onMessageReceived(messageEvent: MessageEvent) {
-        if (messageEvent.path == "/padel_score_sync") {
-            val data = String(messageEvent.data, Charsets.UTF_8)
-            val parts = data.split(",")
-            if (parts.size >= 7) {
-                runOnUiThread {
-                    scoreA = parts[0].toIntOrNull() ?: 0
-                    scoreB = parts[1].toIntOrNull() ?: 0
-                    gamesA = parts[2].toIntOrNull() ?: 0
-                    gamesB = parts[3].toIntOrNull() ?: 0
-                    setsA = parts[4].toIntOrNull() ?: 0
-                    setsB = parts[5].toIntOrNull() ?: 0
-                    isGoldenPoint = parts[6].toBoolean()
-                    isModeSelected = true
-
-                    val layoutModeSelection = findViewById<View>(R.id.layoutModeSelection)
-                    layoutModeSelection?.visibility = View.GONE
-
-                    val tvWearWaiting = findViewById<View>(R.id.tvWearWaiting)
-                    val layoutWearMainContent = findViewById<View>(R.id.layoutWearMainContent)
-                    tvWearWaiting?.visibility = View.GONE
-                    layoutWearMainContent?.visibility = View.VISIBLE
-
-                    updateUI()
-                }
-            }
-        } else if (messageEvent.path == "/request_sync") {
-            syncState()
+        try {
+            unregisterReceiver(updateReceiver)
+        } catch (e: Exception) {
+            // Ignorar si no estaba registrado
         }
     }
 
