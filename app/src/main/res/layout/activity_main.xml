@@ -5,7 +5,6 @@
     android:background="#050505"
     android:keepScreenOn="true">
 
-    <!-- Marcador Principal (Dividido Verticalmente: Izquierda y Derecha) -->
     <LinearLayout
         android:id="@+id/layoutMainContent"
         android:layout_width="match_parent"
@@ -34,10 +33,10 @@
                     android:id="@+id/tvSetsA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SETS: 0\nJUEGOS: 0"
+                    android:text="SETS: 0  JUEGOS: 0"
                     android:gravity="center"
                     android:textColor="#81C784"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -46,9 +45,9 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#81C784"
-                    android:textSize="72sp"
+                    android:textSize="110sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
         </FrameLayout>
 
@@ -79,10 +78,10 @@
                     android:id="@+id/tvSetsB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SETS: 0\nJUEGOS: 0"
+                    android:text="SETS: 0  JUEGOS: 0"
                     android:gravity="center"
                     android:textColor="#64B5F6"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -91,9 +90,9 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#64B5F6"
-                    android:textSize="72sp"
+                    android:textSize="110sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>

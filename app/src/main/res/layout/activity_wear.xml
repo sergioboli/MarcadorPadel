@@ -12,6 +12,7 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
+        <!-- Equipo A (Izquierda) -->
         <FrameLayout
             android:id="@+id/layoutTeamA"
             android:layout_width="0dp"
@@ -33,9 +34,9 @@
                     android:id="@+id/tvSetsA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SET: 0  JUEGO: 0"
+                    android:text="S: 0\nJ: 0"
                     android:textColor="#81C784"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:gravity="center" />
 
@@ -45,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#81C784"
-                    android:textSize="48sp"
+                    android:textSize="50sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </FrameLayout>
@@ -55,6 +56,7 @@
             android:layout_height="match_parent"
             android:background="#222222" />
 
+        <!-- Equipo B (Derecha) -->
         <FrameLayout
             android:id="@+id/layoutTeamB"
             android:layout_width="0dp"
@@ -76,9 +78,9 @@
                     android:id="@+id/tvSetsB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SET: 0  JUEGO: 0"
+                    android:text="S: 0\nJ: 0"
                     android:textColor="#64B5F6"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:gravity="center" />
 
@@ -88,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#64B5F6"
-                    android:textSize="48sp"
+                    android:textSize="50sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </FrameLayout>
