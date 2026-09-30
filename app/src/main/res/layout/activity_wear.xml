@@ -2,17 +2,18 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#050505">
+    android:background="#050505"
+    android:keepScreenOn="true">
 
-    <!-- Marcador Principal (Layout Horizontal) -->
+    <!-- Contenido Principal Marcador Reloj -->
     <LinearLayout
+        android:id="@+id/layoutWearMainContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="16dp"
-        android:weightSum="2">
+        android:visibility="gone">
 
-        <!-- Equipo 1 (Izquierda - Verde) -->
+        <!-- Equipo A (Izquierda - Verde) -->
         <LinearLayout
             android:id="@+id/layoutTeamA"
             android:layout_width="0dp"
@@ -20,41 +21,38 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="#104CAF50"
+            android:background="#154CAF50"
             android:clickable="true"
             android:focusable="true"
             android:padding="2dp">
 
-            <!-- Puntuación ARRIBA (Texto más pequeño) -->
-            <TextView
-                android:id="@+id/tvScoreA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#4CAF50"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- Sets y Juegos ABAJO -->
             <TextView
                 android:id="@+id/tvSetsA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SET:0\nJUEGO:0"
-                android:textColor="#4CAF50"
-                android:textSize="8sp"
+                android:textColor="#81C784"
+                android:textSize="11sp"
                 android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginTop="2dp" />
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tvScoreA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#81C784"
+                android:textSize="55sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Línea divisoria vertical -->
+        <!-- Divisor Vertical -->
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#222222" />
 
-        <!-- Equipo 2 (Derecha - Azul) -->
+        <!-- Equipo B (Derecha - Azul) -->
         <LinearLayout
             android:id="@+id/layoutTeamB"
             android:layout_width="0dp"
@@ -62,72 +60,43 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="#102196F3"
+            android:background="#152196F3"
             android:clickable="true"
             android:focusable="true"
             android:padding="2dp">
 
-            <!-- Puntuación ARRIBA (Texto más pequeño) -->
-            <TextView
-                android:id="@+id/tvScoreB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#2196F3"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- Sets y Juegos ABAJO -->
             <TextView
                 android:id="@+id/tvSetsB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SET:0\nJUEGO:0"
-                android:textColor="#2196F3"
-                android:textSize="8sp"
+                android:textColor="#64B5F6"
+                android:textSize="11sp"
                 android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginTop="2dp" />
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tvScoreB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#64B5F6"
+                android:textSize="55sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Modal de Selección de Modo Inicial -->
-    <LinearLayout
-        android:id="@+id/layoutWearModeSelection"
+    <!-- Mensaje de Espera si aún no se ha elegido modo en el móvil -->
+    <TextView
+        android:id="@+id/tvWearWaiting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
         android:gravity="center"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Modo de juego"
-            android:textColor="#FFFFFF"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="6dp"/>
-
-        <Button
-            android:id="@+id/btnWearModeNormal"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="Ventaja"
-            android:textSize="10sp"
-            android:backgroundTint="#2196F3"
-            android:textColor="#FFFFFF"/>
-
-        <Button
-            android:id="@+id/btnWearModeGold"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="4dp"
-            android:text="Punto de Oro"
-            android:textSize="10sp"
-            android:backgroundTint="#4CAF50"
-            android:textColor="#FFFFFF"/>
-    </LinearLayout>
+        android:text="Selecciona modo\nen el móvil"
+        android:textColor="#FFCA28"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:visibility="visible" />
 
 </FrameLayout>
