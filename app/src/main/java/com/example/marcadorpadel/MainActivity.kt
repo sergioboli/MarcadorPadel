@@ -1,5 +1,6 @@
 package com.example.marcadorpadel
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -18,32 +19,53 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     private var setsA = 0
     private var setsB = 0
     private var isGoldenPoint = false
+    private var isModeSelected = false
 
     private val pointsSequence = arrayOf("0", "15", "30", "40")
     private lateinit var syncManager: WearSyncManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        // Si se ejecuta en un reloj Wear OS, redirigir a la interfaz del reloj
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH)) {
+            setContentView(R.layout.activity_wear)
+            setupWearEvents()
+        } else {
+            setContentView(R.layout.activity_main)
+            setupPhoneEvents()
+        }
 
         syncManager = WearSyncManager(this)
+    }
 
-        val layoutSelection = findViewById<View>(R.id.layoutModeSelection)
-        val btnVentaja = findViewById<Button>(R.id.btnVentaja)
+    private fun setupPhoneEvents() {
+        val layoutModeSelection = findViewById<View>(R.id.layoutModeSelection)
         val btnPuntoOro = findViewById<Button>(R.id.btnPuntoOro)
-
-        btnVentaja?.setOnClickListener {
-            isGoldenPoint = false
-            layoutSelection?.visibility = View.GONE
-            syncState()
-        }
+        val btnVentaja = findViewById<Button>(R.id.btnVentaja)
 
         btnPuntoOro?.setOnClickListener {
             isGoldenPoint = true
-            layoutSelection?.visibility = View.GONE
+            isModeSelected = true
+            layoutModeSelection?.visibility = View.GONE
             syncState()
         }
 
+        btnVentaja?.setOnClickListener {
+            isGoldenPoint = false
+            isModeSelected = true
+            layoutModeSelection?.visibility = View.GONE
+            syncState()
+        }
+
+        setupClickListeners()
+    }
+
+    private fun setupWearEvents() {
+        setupClickListeners()
+    }
+
+    private fun setupClickListeners() {
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
@@ -58,11 +80,10 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
             subtractPoint(false)
             true
         }
-
-        updateUI()
     }
 
     private fun addPoint(isTeamA: Boolean) {
+        if (!isModeSelected && !packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH)) return
         if (isTeamA) scoreA++ else scoreB++
         checkGameWinner()
         updateUI()
@@ -107,6 +128,7 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     override fun onResume() {
         super.onResume()
         Wearable.getMessageClient(this).addListener(this)
+        syncManager.sendCustomMessage("/request_sync", "get")
     }
 
     override fun onPause() {
@@ -115,9 +137,7 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     }
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
-        if (messageEvent.path == "/request_sync") {
-            syncState()
-        } else if (messageEvent.path == "/padel_score_sync") {
+        if (messageEvent.path == "/padel_score_sync") {
             val data = String(messageEvent.data, Charsets.UTF_8)
             val parts = data.split(",")
             if (parts.size >= 7) {
@@ -129,10 +149,21 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
                     setsA = parts[4].toIntOrNull() ?: 0
                     setsB = parts[5].toIntOrNull() ?: 0
                     isGoldenPoint = parts[6].toBoolean()
+                    isModeSelected = true
+
+                    val layoutModeSelection = findViewById<View>(R.id.layoutModeSelection)
+                    layoutModeSelection?.visibility = View.GONE
+
+                    val tvWearWaiting = findViewById<View>(R.id.tvWearWaiting)
+                    val layoutWearMainContent = findViewById<View>(R.id.layoutWearMainContent)
+                    tvWearWaiting?.visibility = View.GONE
+                    layoutWearMainContent?.visibility = View.VISIBLE
 
                     updateUI()
                 }
             }
+        } else if (messageEvent.path == "/request_sync") {
+            syncState()
         }
     }
 
@@ -145,8 +176,13 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         tvScoreA?.text = formatScore(scoreA, scoreB)
         tvScoreB?.text = formatScore(scoreB, scoreA)
 
-        tvSetsA?.text = "SETS: $setsA  JUEGOS: $gamesA"
-        tvSetsB?.text = "SETS: $setsB  JUEGOS: $gamesB"
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH)) {
+            tvSetsA?.text = "SETS: $setsA\nJUEGOS: $gamesA"
+            tvSetsB?.text = "SETS: $setsB\nJUEGOS: $gamesB"
+        } else {
+            tvSetsA?.text = "SETS: $setsA   JUEGOS: $gamesA"
+            tvSetsB?.text = "SETS: $setsB   JUEGOS: $gamesB"
+        }
     }
 
     private fun formatScore(myScore: Int, opponentScore: Int): String {

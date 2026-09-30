@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-        <!-- Equipo A -->
+        <!-- Equipo A (Izquierda) -->
         <FrameLayout
             android:id="@+id/layoutTeamA"
             android:layout_width="0dp"
@@ -36,7 +36,7 @@
                     android:text="SETS: 0   JUEGOS: 0"
                     android:gravity="center"
                     android:textColor="#81C784"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#81C784"
-                    android:textSize="100sp"
+                    android:textSize="180sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </FrameLayout>
@@ -56,7 +56,7 @@
             android:layout_height="match_parent"
             android:background="#222222" />
 
-        <!-- Equipo B -->
+        <!-- Equipo B (Derecha) -->
         <FrameLayout
             android:id="@+id/layoutTeamB"
             android:layout_width="0dp"
@@ -80,7 +80,7 @@
                     android:text="SETS: 0   JUEGOS: 0"
                     android:gravity="center"
                     android:textColor="#64B5F6"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#64B5F6"
-                    android:textSize="100sp"
+                    android:textSize="180sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </FrameLayout>
