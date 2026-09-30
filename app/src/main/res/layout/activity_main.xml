@@ -6,7 +6,7 @@
     android:background="#050505"
     android:keepScreenOn="true">
 
-    <!-- Equipo 1 (Lado Izquierdo) -->
+    <!-- Equipo 1 (Izquierda - Verde) -->
     <LinearLayout
         android:id="@+id/layoutTeamA"
         android:layout_width="0dp"
@@ -17,43 +17,37 @@
         android:background="#154CAF50"
         android:clickable="true"
         android:focusable="true"
-        android:padding="16dp">
+        android:padding="8dp">
 
+        <!-- Sets y Juegos ENCIMA de los puntos -->
         <TextView
-            android:id="@+id/tvTeamA"
+            android:id="@+id/tvSetsA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EQUIPO 1"
+            android:text="SET:0 JUEGO:0"
             android:textColor="#81C784"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
 
+        <!-- Puntuación Gigante (Doble de tamaño) -->
         <TextView
             android:id="@+id/tvScoreA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textColor="#FFFFFF"
-            android:textSize="96sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvSetsA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="S:0 J:0"
             android:textColor="#81C784"
-            android:textSize="20sp"
+            android:textSize="160sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Línea Divisoria Central -->
+    <!-- Línea Divisoria Vertical -->
     <View
         android:layout_width="2dp"
         android:layout_height="match_parent"
-        android:background="#333333" />
+        android:background="#222222" />
 
-    <!-- Equipo 2 (Lado Derecho) -->
+    <!-- Equipo 2 (Derecha - Azul) -->
     <LinearLayout
         android:id="@+id/layoutTeamB"
         android:layout_width="0dp"
@@ -64,33 +58,27 @@
         android:background="#152196F3"
         android:clickable="true"
         android:focusable="true"
-        android:padding="16dp">
+        android:padding="8dp">
 
+        <!-- Sets y Juegos ENCIMA de los puntos -->
         <TextView
-            android:id="@+id/tvTeamB"
+            android:id="@+id/tvSetsB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EQUIPO 2"
+            android:text="SET:0 JUEGO:0"
             android:textColor="#64B5F6"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
 
+        <!-- Puntuación Gigante (Doble de tamaño) -->
         <TextView
             android:id="@+id/tvScoreB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textColor="#FFFFFF"
-            android:textSize="96sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvSetsB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="S:0 J:0"
             android:textColor="#64B5F6"
-            android:textSize="20sp"
+            android:textSize="160sp"
             android:textStyle="bold" />
     </LinearLayout>
 
