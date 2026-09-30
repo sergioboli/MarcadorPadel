@@ -2,7 +2,6 @@ package com.example.marcadorpadel
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.wearable.MessageClient
@@ -35,27 +34,8 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
 
         syncManager = WearSyncManager(this)
 
-        val layoutMode = findViewById<View>(R.id.layoutWearModeSelection)
-        val btnNormal = findViewById<Button>(R.id.btnWearModeNormal)
-        val btnGold = findViewById<Button>(R.id.btnWearModeGold)
-
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
-
-        resetGame()
-        layoutMode?.visibility = View.VISIBLE
-
-        btnNormal?.setOnClickListener {
-            isGoldenPoint = false
-            layoutMode?.visibility = View.GONE
-            syncState()
-        }
-
-        btnGold?.setOnClickListener {
-            isGoldenPoint = true
-            layoutMode?.visibility = View.GONE
-            syncState()
-        }
 
         layoutTeamA?.setOnClickListener { addPoint(true) }
         layoutTeamB?.setOnClickListener { addPoint(false) }
@@ -68,18 +48,6 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
             undoPoint()
             true
         }
-
-        updateUI()
-    }
-
-    private fun resetGame() {
-        scoreA = 0
-        scoreB = 0
-        gamesA = 0
-        gamesB = 0
-        setsA = 0
-        setsB = 0
-        history.clear()
     }
 
     private fun saveState() {
@@ -156,7 +124,11 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
                     setsA = parts[4].toIntOrNull() ?: 0
                     setsB = parts[5].toIntOrNull() ?: 0
                     isGoldenPoint = parts[6].toBoolean()
-                    findViewById<View>(R.id.layoutWearModeSelection)?.visibility = View.GONE
+
+                    // Ocultar pantalla de espera y mostrar marcador
+                    findViewById<View>(R.id.tvWearWaiting)?.visibility = View.GONE
+                    findViewById<View>(R.id.layoutWearMainContent)?.visibility = View.VISIBLE
+
                     updateUI()
                 }
             }
@@ -172,6 +144,7 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         tvScoreA?.text = formatScore(scoreA, scoreB)
         tvScoreB?.text = formatScore(scoreB, scoreA)
 
+        // Formato vertical claro para reloj
         tvSetsA?.text = "SET:$setsA\nJUEGO:$gamesA"
         tvSetsB?.text = "SET:$setsB\nJUEGO:$gamesB"
     }
