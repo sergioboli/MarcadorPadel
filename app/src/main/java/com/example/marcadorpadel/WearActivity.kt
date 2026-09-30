@@ -18,15 +18,8 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     private var setsB = 0
     private var isGoldenPoint = false
 
-    private val history = mutableListOf<State>()
     private val pointsSequence = arrayOf("0", "15", "30", "40")
     private lateinit var syncManager: WearSyncManager
-
-    data class State(
-        val scoreA: Int, val scoreB: Int,
-        val gamesA: Int, val gamesB: Int,
-        val setsA: Int, val setsB: Int
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,43 +30,36 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
+        // Pulsación corta: Añadir punto a ese equipo
         layoutTeamA?.setOnClickListener { addPoint(true) }
         layoutTeamB?.setOnClickListener { addPoint(false) }
 
+        // Pulsación larga: Restar punto específicamente al equipo pulsado
         layoutTeamA?.setOnLongClickListener {
-            undoPoint()
+            subtractPoint(true)
             true
         }
         layoutTeamB?.setOnLongClickListener {
-            undoPoint()
+            subtractPoint(false)
             true
         }
     }
 
-    private fun saveState() {
-        history.add(State(scoreA, scoreB, gamesA, gamesB, setsA, setsB))
-    }
-
     private fun addPoint(isTeamA: Boolean) {
-        saveState()
         if (isTeamA) scoreA++ else scoreB++
         checkGameWinner()
         updateUI()
         syncState()
     }
 
-    private fun undoPoint() {
-        if (history.isNotEmpty()) {
-            val lastState = history.removeAt(history.size - 1)
-            scoreA = lastState.scoreA
-            scoreB = lastState.scoreB
-            gamesA = lastState.gamesA
-            gamesB = lastState.gamesB
-            setsA = lastState.setsA
-            setsB = lastState.setsB
-            updateUI()
-            syncState()
+    private fun subtractPoint(isTeamA: Boolean) {
+        if (isTeamA) {
+            if (scoreA > 0) scoreA--
+        } else {
+            if (scoreB > 0) scoreB--
         }
+        updateUI()
+        syncState()
     }
 
     private fun checkGameWinner() {
@@ -104,6 +90,8 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     override fun onResume() {
         super.onResume()
         Wearable.getMessageClient(this).addListener(this)
+        // Solicitar datos actualizados al móvil al abrir el reloj
+        syncManager.sendCustomMessage("/request_sync", "get")
     }
 
     override fun onPause() {
@@ -125,7 +113,7 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
                     setsB = parts[5].toIntOrNull() ?: 0
                     isGoldenPoint = parts[6].toBoolean()
 
-                    // Ocultar pantalla de espera y mostrar marcador
+                    // Mostrar interfaz del marcador y ocultar mensaje de espera
                     findViewById<View>(R.id.tvWearWaiting)?.visibility = View.GONE
                     findViewById<View>(R.id.layoutWearMainContent)?.visibility = View.VISIBLE
 
@@ -144,9 +132,8 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         tvScoreA?.text = formatScore(scoreA, scoreB)
         tvScoreB?.text = formatScore(scoreB, scoreA)
 
-        // Formato vertical claro para reloj
-        tvSetsA?.text = "SET:$setsA\nJUEGO:$gamesA"
-        tvSetsB?.text = "SET:$setsB\nJUEGO:$gamesB"
+        tvSetsA?.text = "SET: $setsA  JUEGO: $gamesA"
+        tvSetsB?.text = "SET: $setsB  JUEGO: $gamesB"
     }
 
     private fun formatScore(myScore: Int, opponentScore: Int): String {
