@@ -42,6 +42,10 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
+        // Forzar la vista de selección de modo al abrir la app en el reloj
+        resetGame()
+        layoutMode?.visibility = View.VISIBLE
+
         btnNormal?.setOnClickListener {
             isGoldenPoint = false
             layoutMode?.visibility = View.GONE
@@ -54,11 +58,9 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
             syncState()
         }
 
-        // Clic corto: Sumar punto
         layoutTeamA?.setOnClickListener { addPoint(true) }
         layoutTeamB?.setOnClickListener { addPoint(false) }
 
-        // Clic largo: Deshacer último punto
         layoutTeamA?.setOnLongClickListener {
             undoPoint()
             true
@@ -69,6 +71,16 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         }
 
         updateUI()
+    }
+
+    private fun resetGame() {
+        scoreA = 0
+        scoreB = 0
+        gamesA = 0
+        gamesB = 0
+        setsA = 0
+        setsB = 0
+        history.clear()
     }
 
     private fun saveState() {
@@ -145,6 +157,7 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
                     setsA = parts[4].toIntOrNull() ?: 0
                     setsB = parts[5].toIntOrNull() ?: 0
                     isGoldenPoint = parts[6].toBoolean()
+                    findViewById<View>(R.id.layoutWearModeSelection)?.visibility = View.GONE
                     updateUI()
                 }
             }
