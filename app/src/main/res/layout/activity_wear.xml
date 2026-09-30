@@ -4,22 +4,22 @@
     android:layout_height="match_parent"
     android:background="#050505">
 
-    <!-- Capa del Marcador Principal -->
+    <!-- Marcador Principal Ajustado para Muñeca -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="2">
 
-        <!-- Equipo A (Izquierda / Arriba) -->
+        <!-- Equipo 1 (Arriba - Verde) -->
         <LinearLayout
             android:id="@+id/layoutTeamA"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="#154CAF50"
+            android:background="#104CAF50"
             android:clickable="true"
             android:focusable="true">
 
@@ -27,9 +27,9 @@
                 android:id="@+id/tvSetsA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="S:0 J:0"
-                android:textColor="#81C784"
-                android:textSize="12sp"
+                android:text="SET:0 JUEGO:0"
+                android:textColor="#4CAF50"
+                android:textSize="10sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -37,26 +37,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="#FFFFFF"
-                android:textSize="44sp"
+                android:textColor="#4CAF50"
+                android:textSize="28sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Línea separadora -->
+        <!-- Línea separadora horizontal -->
         <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#333333" />
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#222222" />
 
-        <!-- Equipo B (Derecha / Abajo) -->
+        <!-- Equipo 2 (Abajo - Azul) -->
         <LinearLayout
             android:id="@+id/layoutTeamB"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="#152196F3"
+            android:background="#102196F3"
             android:clickable="true"
             android:focusable="true">
 
@@ -64,9 +64,9 @@
                 android:id="@+id/tvSetsB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="S:0 J:0"
-                android:textColor="#64B5F6"
-                android:textSize="12sp"
+                android:text="SET:0 JUEGO:0"
+                android:textColor="#2196F3"
+                android:textSize="10sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -74,13 +74,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="#FFFFFF"
-                android:textSize="44sp"
+                android:textColor="#2196F3"
+                android:textSize="28sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Superposición de Selección de Modo (Punto de Oro / Normal) -->
+    <!-- Modal de Selección de Modo Inicial -->
     <LinearLayout
         android:id="@+id/layoutWearModeSelection"
         android:layout_width="match_parent"
@@ -95,26 +95,26 @@
             android:layout_height="wrap_content"
             android:text="Modo de juego"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
         <Button
             android:id="@+id/btnWearModeNormal"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="32dp"
             android:text="Ventaja"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:backgroundTint="#2196F3"
             android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/btnWearModeGold"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="32dp"
             android:layout_marginTop="4dp"
             android:text="Punto de Oro"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:backgroundTint="#4CAF50"
             android:textColor="#FFFFFF"/>
     </LinearLayout>
