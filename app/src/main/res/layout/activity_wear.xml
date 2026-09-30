@@ -9,38 +9,26 @@
         android:id="@+id/layoutWearMainContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="2"
         android:visibility="gone">
 
-        <!-- Equipo A (Izquierda) -->
+        <!-- Equipo A -->
         <FrameLayout
             android:id="@+id/layoutTeamA"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#154CAF50"
             android:clickable="true"
             android:focusable="true">
 
             <LinearLayout
-                android:id="@+id/containerContentA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:rotation="90">
-
-                <TextView
-                    android:id="@+id/tvSetsA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="S:0 J:0"
-                    android:textColor="#81C784"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:gravity="center" />
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/tvScoreA"
@@ -48,44 +36,42 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#81C784"
-                    android:textSize="32sp"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:id="@+id/tvSetsA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SETS: 0\nJUEGOS: 0"
+                    android:textColor="#81C784"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </FrameLayout>
 
         <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:background="#222222" />
 
-        <!-- Equipo B (Derecha) -->
+        <!-- Equipo B -->
         <FrameLayout
             android:id="@+id/layoutTeamB"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#152196F3"
             android:clickable="true"
             android:focusable="true">
 
             <LinearLayout
-                android:id="@+id/containerContentB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:rotation="90">
-
-                <TextView
-                    android:id="@+id/tvSetsB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="S:0 J:0"
-                    android:textColor="#64B5F6"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:gravity="center" />
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/tvScoreB"
@@ -93,7 +79,17 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#64B5F6"
-                    android:textSize="32sp"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:id="@+id/tvSetsB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SETS: 0\nJUEGOS: 0"
+                    android:textColor="#64B5F6"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </FrameLayout>
