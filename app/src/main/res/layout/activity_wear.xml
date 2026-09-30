@@ -5,7 +5,6 @@
     android:background="#050505"
     android:keepScreenOn="true">
 
-    <!-- Contenido Principal Marcador Reloj -->
     <LinearLayout
         android:id="@+id/layoutWearMainContent"
         android:layout_width="match_parent"
@@ -13,7 +12,6 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
-        <!-- Equipo A (Izquierda - Verde) -->
         <FrameLayout
             android:id="@+id/layoutTeamA"
             android:layout_width="0dp"
@@ -23,7 +21,6 @@
             android:clickable="true"
             android:focusable="true">
 
-            <!-- Rotación a 90 grados para orientación vertical -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,13 +50,11 @@
             </LinearLayout>
         </FrameLayout>
 
-        <!-- Divisor Vertical -->
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#222222" />
 
-        <!-- Equipo B (Derecha - Azul) -->
         <FrameLayout
             android:id="@+id/layoutTeamB"
             android:layout_width="0dp"
@@ -69,7 +64,6 @@
             android:clickable="true"
             android:focusable="true">
 
-            <!-- Rotación a 90 grados para orientación vertical -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,7 +94,6 @@
         </FrameLayout>
     </LinearLayout>
 
-    <!-- Mensaje de Espera si aún no se ha recibido información del móvil -->
     <TextView
         android:id="@+id/tvWearWaiting"
         android:layout_width="match_parent"

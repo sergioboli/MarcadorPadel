@@ -30,11 +30,9 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
-        // Pulsación corta: Añadir punto a ese equipo
         layoutTeamA?.setOnClickListener { addPoint(true) }
         layoutTeamB?.setOnClickListener { addPoint(false) }
 
-        // Pulsación larga: Restar punto específicamente al equipo pulsado
         layoutTeamA?.setOnLongClickListener {
             subtractPoint(true)
             true
@@ -90,7 +88,6 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     override fun onResume() {
         super.onResume()
         Wearable.getMessageClient(this).addListener(this)
-        // Solicitar datos actualizados al móvil al abrir el reloj
         syncManager.sendCustomMessage("/request_sync", "get")
     }
 
@@ -113,7 +110,6 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
                     setsB = parts[5].toIntOrNull() ?: 0
                     isGoldenPoint = parts[6].toBoolean()
 
-                    // Mostrar interfaz del marcador y ocultar mensaje de espera
                     findViewById<View>(R.id.tvWearWaiting)?.visibility = View.GONE
                     findViewById<View>(R.id.layoutWearMainContent)?.visibility = View.VISIBLE
 
