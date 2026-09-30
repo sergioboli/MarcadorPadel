@@ -29,6 +29,12 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
 
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
+        val containerContentA = findViewById<View>(R.id.containerContentA)
+        val containerContentB = findViewById<View>(R.id.containerContentB)
+
+        // Forzar rotacion de 90 grados por codigo
+        containerContentA?.rotation = 90f
+        containerContentB?.rotation = 90f
 
         layoutTeamA?.setOnClickListener { addPoint(true) }
         layoutTeamB?.setOnClickListener { addPoint(false) }
