@@ -6,11 +6,13 @@
 
     <application
         android:allowBackup="true"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:roundIcon="@android:drawable/ic_menu_compass"
         android:label="Marcador Padel"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
-        <!-- Actividad Principal Móvil (Forzada a Horizontal desde Manifest) -->
+        <!-- Actividad Principal Móvil (Horizontal) -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
