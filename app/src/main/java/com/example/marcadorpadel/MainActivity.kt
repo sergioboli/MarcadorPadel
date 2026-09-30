@@ -28,14 +28,9 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
 
         syncManager = WearSyncManager(this)
 
-        val layoutSelection = findViewById<View?>(resources.getIdentifier("layoutModeSelection", "id", packageName))
-        
-        // Intentar obtener referencias a los botones por ID o de forma genérica si difieren en el XML
-        val btnVentaja = findViewById<View?>(resources.getIdentifier("btnVentaja", "id", packageName)) 
-            ?: findViewById<View?>(resources.getIdentifier("btnGoldenNo", "id", packageName))
-            
-        val btnPuntoOro = findViewById<View?>(resources.getIdentifier("btnPuntoOro", "id", packageName)) 
-            ?: findViewById<View?>(resources.getIdentifier("btnGoldenYes", "id", packageName))
+        val layoutSelection = findViewById<View>(R.id.layoutModeSelection)
+        val btnVentaja = findViewById<Button>(R.id.btnVentaja)
+        val btnPuntoOro = findViewById<Button>(R.id.btnPuntoOro)
 
         btnVentaja?.setOnClickListener {
             isGoldenPoint = false
@@ -49,8 +44,8 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
             syncState()
         }
 
-        val layoutTeamA = findViewById<View?>(resources.getIdentifier("layoutTeamA", "id", packageName))
-        val layoutTeamB = findViewById<View?>(resources.getIdentifier("layoutTeamB", "id", packageName))
+        val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
+        val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
         layoutTeamA?.setOnClickListener { addPoint(true) }
         layoutTeamB?.setOnClickListener { addPoint(false) }
@@ -142,10 +137,10 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
     }
 
     private fun updateUI() {
-        val tvScoreA = findViewById<TextView?>(resources.getIdentifier("tvScoreA", "id", packageName))
-        val tvScoreB = findViewById<TextView?>(resources.getIdentifier("tvScoreB", "id", packageName))
-        val tvSetsA = findViewById<TextView?>(resources.getIdentifier("tvSetsA", "id", packageName))
-        val tvSetsB = findViewById<TextView?>(resources.getIdentifier("tvSetsB", "id", packageName))
+        val tvScoreA = findViewById<TextView>(R.id.tvScoreA)
+        val tvScoreB = findViewById<TextView>(R.id.tvScoreB)
+        val tvSetsA = findViewById<TextView>(R.id.tvSetsA)
+        val tvSetsB = findViewById<TextView>(R.id.tvSetsB)
 
         tvScoreA?.text = formatScore(scoreA, scoreB)
         tvScoreB?.text = formatScore(scoreB, scoreA)
