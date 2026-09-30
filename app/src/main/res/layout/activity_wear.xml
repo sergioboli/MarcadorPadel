@@ -14,37 +14,44 @@
         android:visibility="gone">
 
         <!-- Equipo A (Izquierda - Verde) -->
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/layoutTeamA"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
             android:background="#154CAF50"
             android:clickable="true"
-            android:focusable="true"
-            android:padding="2dp">
+            android:focusable="true">
 
-            <TextView
-                android:id="@+id/tvSetsA"
+            <!-- Rotación a 90 grados para orientación vertical -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SET:0\nJUEGO:0"
-                android:textColor="#81C784"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:gravity="center" />
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:rotation="90">
 
-            <TextView
-                android:id="@+id/tvScoreA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#81C784"
-                android:textSize="55sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvSetsA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SET: 0  JUEGO: 0"
+                    android:textColor="#81C784"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvScoreA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#81C784"
+                    android:textSize="48sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
 
         <!-- Divisor Vertical -->
         <View
@@ -53,48 +60,55 @@
             android:background="#222222" />
 
         <!-- Equipo B (Derecha - Azul) -->
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/layoutTeamB"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
             android:background="#152196F3"
             android:clickable="true"
-            android:focusable="true"
-            android:padding="2dp">
+            android:focusable="true">
 
-            <TextView
-                android:id="@+id/tvSetsB"
+            <!-- Rotación a 90 grados para orientación vertical -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SET:0\nJUEGO:0"
-                android:textColor="#64B5F6"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:gravity="center" />
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:rotation="90">
 
-            <TextView
-                android:id="@+id/tvScoreB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#64B5F6"
-                android:textSize="55sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvSetsB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SET: 0  JUEGO: 0"
+                    android:textColor="#64B5F6"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvScoreB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#64B5F6"
+                    android:textSize="48sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 
-    <!-- Mensaje de Espera si aún no se ha elegido modo en el móvil -->
+    <!-- Mensaje de Espera si aún no se ha recibido información del móvil -->
     <TextView
         android:id="@+id/tvWearWaiting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="Selecciona modo\nen el móvil"
+        android:text="Conectando con el móvil..."
         android:textColor="#FFCA28"
-        android:textSize="14sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         android:padding="16dp"
         android:visibility="visible" />
