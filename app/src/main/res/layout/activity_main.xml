@@ -33,7 +33,7 @@
                     android:id="@+id/tvSetsA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SETS: 0  JUEGOS: 0"
+                    android:text="SETS: 0   JUEGOS: 0"
                     android:gravity="center"
                     android:textColor="#81C784"
                     android:textSize="18sp"
@@ -45,9 +45,9 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#81C784"
-                    android:textSize="110sp"
+                    android:textSize="150sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="4dp" />
             </LinearLayout>
         </FrameLayout>
 
@@ -78,7 +78,7 @@
                     android:id="@+id/tvSetsB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SETS: 0  JUEGOS: 0"
+                    android:text="SETS: 0   JUEGOS: 0"
                     android:gravity="center"
                     android:textColor="#64B5F6"
                     android:textSize="18sp"
@@ -90,9 +90,9 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#64B5F6"
-                    android:textSize="110sp"
+                    android:textSize="150sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="4dp" />
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>
