@@ -160,8 +160,8 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         tvScoreA?.text = formatScore(scoreA, scoreB)
         tvScoreB?.text = formatScore(scoreB, scoreA)
 
-        tvSetsA?.text = "SET:$setsA JUEGO:$gamesA"
-        tvSetsB?.text = "SET:$setsB JUEGO:$gamesB"
+        tvSetsA?.text = "SET:$setsA\nJUEGO:$gamesA"
+        tvSetsB?.text = "SET:$setsB\nJUEGO:$gamesB"
     }
 
     private fun formatScore(myScore: Int, opponentScore: Int): String {
