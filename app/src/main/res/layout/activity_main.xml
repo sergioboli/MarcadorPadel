@@ -5,19 +5,19 @@
     android:background="#050505"
     android:keepScreenOn="true">
 
-    <!-- Marcador Principal -->
+    <!-- Marcador Principal (Dividido Verticalmente: Izquierda y Derecha) -->
     <LinearLayout
         android:id="@+id/layoutMainContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:weightSum="2">
 
-        <!-- Equipo A (Arriba/Izquierda) -->
+        <!-- Equipo A (Izquierda) -->
         <FrameLayout
             android:id="@+id/layoutTeamA"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#154CAF50"
             android:clickable="true"
@@ -34,7 +34,8 @@
                     android:id="@+id/tvSetsA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SETS: 0  JUEGOS: 0"
+                    android:text="SETS: 0\nJUEGOS: 0"
+                    android:gravity="center"
                     android:textColor="#81C784"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -45,21 +46,23 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#81C784"
-                    android:textSize="80sp"
-                    android:textStyle="bold" />
+                    android:textSize="72sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp" />
             </LinearLayout>
         </FrameLayout>
 
+        <!-- Separador vertical -->
         <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
             android:background="#222222" />
 
-        <!-- Equipo B (Abajo/Derecha) -->
+        <!-- Equipo B (Derecha) -->
         <FrameLayout
             android:id="@+id/layoutTeamB"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#152196F3"
             android:clickable="true"
@@ -76,7 +79,8 @@
                     android:id="@+id/tvSetsB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SETS: 0  JUEGOS: 0"
+                    android:text="SETS: 0\nJUEGOS: 0"
+                    android:gravity="center"
                     android:textColor="#64B5F6"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -87,8 +91,9 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="#64B5F6"
-                    android:textSize="80sp"
-                    android:textStyle="bold" />
+                    android:textSize="72sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp" />
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>
