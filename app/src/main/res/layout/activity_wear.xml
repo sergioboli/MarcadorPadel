@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:background="#050505">
 
-    <!-- Marcador Principal (Layout Horizontal: Lado Izquierdo vs Lado Derecho) -->
+    <!-- Marcador Principal (Layout Horizontal) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="12dp"
+        android:padding="16dp"
         android:weightSum="2">
 
         <!-- Equipo 1 (Izquierda - Verde) -->
@@ -23,26 +23,28 @@
             android:background="#104CAF50"
             android:clickable="true"
             android:focusable="true"
-            android:padding="4dp">
+            android:padding="2dp">
 
-            <TextView
-                android:id="@+id/tvSetsA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SET:0\nJUEGO:0"
-                android:textColor="#4CAF50"
-                android:textSize="9sp"
-                android:textStyle="bold"
-                android:gravity="center" />
-
+            <!-- Puntuación ARRIBA (Texto más pequeño) -->
             <TextView
                 android:id="@+id/tvScoreA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textColor="#4CAF50"
-                android:textSize="22sp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Sets y Juegos ABAJO -->
+            <TextView
+                android:id="@+id/tvSetsA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SET:0\nJUEGO:0"
+                android:textColor="#4CAF50"
+                android:textSize="8sp"
                 android:textStyle="bold"
+                android:gravity="center"
                 android:layout_marginTop="2dp" />
         </LinearLayout>
 
@@ -63,26 +65,28 @@
             android:background="#102196F3"
             android:clickable="true"
             android:focusable="true"
-            android:padding="4dp">
+            android:padding="2dp">
 
-            <TextView
-                android:id="@+id/tvSetsB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SET:0\nJUEGO:0"
-                android:textColor="#2196F3"
-                android:textSize="9sp"
-                android:textStyle="bold"
-                android:gravity="center" />
-
+            <!-- Puntuación ARRIBA (Texto más pequeño) -->
             <TextView
                 android:id="@+id/tvScoreB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textColor="#2196F3"
-                android:textSize="22sp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Sets y Juegos ABAJO -->
+            <TextView
+                android:id="@+id/tvSetsB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SET:0\nJUEGO:0"
+                android:textColor="#2196F3"
+                android:textSize="8sp"
                 android:textStyle="bold"
+                android:gravity="center"
                 android:layout_marginTop="2dp" />
         </LinearLayout>
     </LinearLayout>
