@@ -42,7 +42,6 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
-        // Forzar la vista de selección de modo al abrir la app en el reloj
         resetGame()
         layoutMode?.visibility = View.VISIBLE
 
