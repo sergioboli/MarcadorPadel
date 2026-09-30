@@ -29,15 +29,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:rotation="90">
 
                 <TextView
                     android:id="@+id/tvSetsA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="S: 0\nJ: 0"
+                    android:text="S:0 J:0"
                     android:textColor="#81C784"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:gravity="center" />
 
@@ -73,15 +74,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:rotation="90">
 
                 <TextView
                     android:id="@+id/tvSetsB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="S: 0\nJ: 0"
+                    android:text="S:0 J:0"
                     android:textColor="#64B5F6"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:gravity="center" />
 

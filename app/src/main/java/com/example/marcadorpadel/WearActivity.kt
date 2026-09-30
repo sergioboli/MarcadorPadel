@@ -29,12 +29,6 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
 
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
-        val containerContentA = findViewById<View>(R.id.containerContentA)
-        val containerContentB = findViewById<View>(R.id.containerContentB)
-
-        // Forzar rotacion de 90 grados por codigo
-        containerContentA?.rotation = 90f
-        containerContentB?.rotation = 90f
 
         layoutTeamA?.setOnClickListener { addPoint(true) }
         layoutTeamB?.setOnClickListener { addPoint(false) }
@@ -134,8 +128,8 @@ class WearActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         tvScoreA?.text = formatScore(scoreA, scoreB)
         tvScoreB?.text = formatScore(scoreB, scoreA)
 
-        tvSetsA?.text = "S: $setsA\nJ: $gamesA"
-        tvSetsB?.text = "S: $setsB\nJ: $gamesB"
+        tvSetsA?.text = "S:$setsA J:$gamesA"
+        tvSetsB?.text = "S:$setsB J:$gamesB"
     }
 
     private fun formatScore(myScore: Int, opponentScore: Int): String {
