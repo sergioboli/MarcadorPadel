@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
-        // Forzar reinicio de datos y mostrar modal al iniciar la app
         resetGame()
         layoutMode?.visibility = View.VISIBLE
 
