@@ -1,8 +1,8 @@
 package com.example.marcadorpadel
 
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.wearable.MessageClient
@@ -31,20 +31,36 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_main)
 
         syncManager = WearSyncManager(this)
 
+        val layoutMode = findViewById<View>(R.id.layoutMainModeSelection)
+        val btnNormal = findViewById<Button>(R.id.btnMainModeNormal)
+        val btnGold = findViewById<Button>(R.id.btnMainModeGold)
+
         val layoutTeamA = findViewById<View>(R.id.layoutTeamA)
         val layoutTeamB = findViewById<View>(R.id.layoutTeamB)
 
-        // Clic corto: Sumar punto
+        // Forzar reinicio de datos y mostrar modal al iniciar la app
+        resetGame()
+        layoutMode?.visibility = View.VISIBLE
+
+        btnNormal?.setOnClickListener {
+            isGoldenPoint = false
+            layoutMode?.visibility = View.GONE
+            syncState()
+        }
+
+        btnGold?.setOnClickListener {
+            isGoldenPoint = true
+            layoutMode?.visibility = View.GONE
+            syncState()
+        }
+
         layoutTeamA?.setOnClickListener { addPoint(true) }
         layoutTeamB?.setOnClickListener { addPoint(false) }
 
-        // Clic largo: Deshacer
         layoutTeamA?.setOnLongClickListener {
             undoPoint()
             true
@@ -55,6 +71,16 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         }
 
         updateUI()
+    }
+
+    private fun resetGame() {
+        scoreA = 0
+        scoreB = 0
+        gamesA = 0
+        gamesB = 0
+        setsA = 0
+        setsB = 0
+        history.clear()
     }
 
     private fun saveState() {
@@ -139,6 +165,7 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
                     setsA = parts[4].toIntOrNull() ?: 0
                     setsB = parts[5].toIntOrNull() ?: 0
                     isGoldenPoint = parts[6].toBoolean()
+                    findViewById<View>(R.id.layoutMainModeSelection)?.visibility = View.GONE
                     updateUI()
                 }
             }
