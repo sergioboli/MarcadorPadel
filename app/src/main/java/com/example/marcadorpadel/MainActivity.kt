@@ -2,6 +2,7 @@ package com.example.marcadorpadel
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.wearable.MessageClient
@@ -28,8 +29,13 @@ class MainActivity : AppCompatActivity(), MessageClient.OnMessageReceivedListene
         syncManager = WearSyncManager(this)
 
         val layoutSelection = findViewById<View?>(resources.getIdentifier("layoutModeSelection", "id", packageName))
-        val btnVentaja = findViewById<View?>(resources.getIdentifier("btnVentaja", "id", packageName))
-        val btnPuntoOro = findViewById<View?>(resources.getIdentifier("btnPuntoOro", "id", packageName))
+        
+        // Intentar obtener referencias a los botones por ID o de forma genérica si difieren en el XML
+        val btnVentaja = findViewById<View?>(resources.getIdentifier("btnVentaja", "id", packageName)) 
+            ?: findViewById<View?>(resources.getIdentifier("btnGoldenNo", "id", packageName))
+            
+        val btnPuntoOro = findViewById<View?>(resources.getIdentifier("btnPuntoOro", "id", packageName)) 
+            ?: findViewById<View?>(resources.getIdentifier("btnGoldenYes", "id", packageName))
 
         btnVentaja?.setOnClickListener {
             isGoldenPoint = false
